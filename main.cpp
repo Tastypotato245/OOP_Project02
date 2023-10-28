@@ -28,8 +28,6 @@ int	read_process()
 		cin >> num_2;
 		inf_int a(num_1.c_str());
 		inf_int b(num_2.c_str());
-		if (op == '0')
-			return (0);
 		if (op_switching(a, op, b) == -1)
 			return (-1);
 	}
