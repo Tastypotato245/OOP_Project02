@@ -14,10 +14,11 @@
 
 // Default constructor
 inf_int::inf_int() : length(1), thesign(true) {
-	this->digits = new char[1];
+	this->digits = new char[2];
 
-	this->digits[0] = 0;
-	this->length = 1;
+	this->digits[0] = '0';
+	this->digits[1] = '\0';
+	this->length = 2;
 	this->thesign = true;
 }
 
@@ -46,12 +47,13 @@ inf_int::inf_int(int num) {
 		length = len;
 	else
 		length = 0;
-	digits = new char[length];
+	digits = new char[length + 1];
 	temp = un;
 	for (int i = 0; i < length; ++i) {
-		digits[i] = temp % 10;
+		digits[i] = temp % 10 + '0';
 		temp /= 10;
 	}
+	digits[length] = '\0';
 }
 
 // Convert string to inf_int
@@ -81,17 +83,18 @@ inf_int::inf_int(const char* str) {
 	length = 0;
 	while (str[length] && str[length] >= '0' && str[length] <= '9')
 		++length;
-	digits = new char[length];
+	digits = new char[length + 1];
 	for (unsigned int i = 0; i < length; ++i)
-		digits[i] = str[length - 1 - i] - '0';
+		digits[i] = str[length - 1 - i];
+	digits[length] = '\0';
 }
 
 // Copy constructor
 inf_int::inf_int(const inf_int& other) {
 	length = other.length;
 	thesign = other.thesign;
-	digits = new char[length];
-	memcpy(digits, other.digits, length);
+	digits = new char[length + 1];
+	memcpy(digits, other.digits, length + 1);
 }
 
 // Destructor
@@ -106,8 +109,8 @@ inf_int& inf_int::operator=(const inf_int& other) {
 
 	length = other.length;
 	thesign = other.thesign;
-	digits = new char[length];
-	memcpy(this->digits, other.digits, length);
+	digits = new char[length + 1];
+	memcpy(this->digits, other.digits, length + 1);
 	return (*this);
 }
 
@@ -171,8 +174,8 @@ inf_int operator+(const inf_int& a, const inf_int& b) {
 			sum = 1;
 		else
 			sum = 0;
-        if (i < a.length) sum += a.digits[i];
-        if (i < b.length) sum += b.digits[i];
+        if (i < a.length) sum += a.digits[i] - '0';
+        if (i < b.length) sum += b.digits[i] - '0';
         if (sum > 9) {
 			sum -= 10;
 			carry = true;
@@ -211,9 +214,9 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
     char* result_digits = new char[big->length];
     int carry = 0;
     for (unsigned int i = 0; i < big->length; ++i) {
-        int diff = big->digits[i] - carry;
+        int diff = (big->digits[i] - '0') - carry;
         if (i < small->length)
-			diff -= small->digits[i];
+			diff -= (small->digits[i] - '0');
         if (diff < 0) {
             diff += 10;
             carry = 1;
@@ -242,7 +245,7 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
     // a의 각 자리수와 b의 각 자리수를 곱함
     for (unsigned int i = 0; i < a.length; i++) {
         for (unsigned int j = 0; j < b.length; j++) {
-            result[i + j] += a.digits[i] * b.digits[j];
+            result[i + j] += (a.digits[i] - '0') * (b.digits[j] - '0');
         }
     }
 
@@ -276,7 +279,7 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
 std::ostream& operator<<(std::ostream& out, const inf_int& num) {
 	if (!num.thesign) out << '-';
 	for (int i = num.length - 1; i >= 0; --i) {
-		out << (char)(num.digits[i] + '0');
+		out << num.digits[i];
 	}
 	return out;
 }
