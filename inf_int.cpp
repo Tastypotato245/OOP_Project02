@@ -13,7 +13,7 @@
 #include "inf_int.h"
 
 // Default constructor
-inf_int::inf_int() : length(1), thesign(true) {
+inf_int::inf_int() {
 	this->digits = new char[1];
 
 	this->digits[0] = 0;
@@ -179,13 +179,17 @@ inf_int operator+(const inf_int& a, const inf_int& b) {
         }
 		else
 			carry = false;
-        result_digits[max_length - 1 - i] = sum + '0';
+        result_digits[i] = sum;
     }
+    inf_int result;
     if (carry)
-        result_digits[max_length] = '1';
-    inf_int result(result_digits);
-    delete[] result_digits;
+	{
+        result_digits[max_length] = 1;
+		++max_length;
+	}
+	result.length = max_length;
     result.thesign = a.thesign;
+	result.digits = result_digits;
     return result;
 }
 
@@ -220,17 +224,18 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
         } else {
             carry = 0;
         }
-		result_digits[big->length - 1 - i] = diff + '0';
+		result_digits[i] = diff;
     }
 
     int endi;
     for (endi = big->length; endi >= 0 && result_digits[endi] == 0; --endi);
     if (endi == -1) {
         delete[] result_digits;
-        return inf_int(0);
+        return inf_int();
     }
-    inf_int result(result_digits);
-    delete[] result_digits;
+    inf_int result;
+	result.digits = result_digits;
+	result.length = endi + 1;
     result.thesign = resultSign;
     return result;
 }
@@ -258,17 +263,17 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
     }
 
 	unsigned int size = result.size();
-    char* result_digits = new char[size + 1];
+    char *result_digits = new char[size];
     for (unsigned int i = 0; i < size; ++i) {
-        result_digits[i] = result[size - 1 - i] + '0';
+        result_digits[i] = result[i];
     }
-	result_digits[size] = '\0';
 //	std::cout << "size : " << result.size() << "\n";
 //	std::cout << "results : " << result_digits << "\n";
 
-    inf_int product(result_digits);
+    inf_int product;
+	product.digits = result_digits;
+	product.length = size;
     product.thesign = !(a.thesign ^ b.thesign); // 곱셈의 결과 부호 결정
-    delete[] result_digits;
     return product;
 }
 
@@ -276,7 +281,7 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
 std::ostream& operator<<(std::ostream& out, const inf_int& num) {
 	if (!num.thesign) out << '-';
 	for (int i = num.length - 1; i >= 0; --i) {
-		out << (int)num.digits[i];
+		out << (char)(num.digits[i] + '0');
 	}
 	return out;
 }
