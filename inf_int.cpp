@@ -276,7 +276,7 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
 std::ostream& operator<<(std::ostream& out, const inf_int& num) {
 	if (!num.thesign) out << '-';
 	for (int i = num.length - 1; i >= 0; --i) {
-		out << (char)(num.digits[i] + '0');
+		out << (int)num.digits[i];
 	}
 	return out;
 }
