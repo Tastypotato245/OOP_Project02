@@ -9,19 +9,19 @@
 #    Updated: 2023/10/28 16:37:52 by kyusulee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+NAME	=	test_inf_int.out
 
-NAME	=	test_inf_int
 SRCS	=	main.cpp inf_int.cpp
 OBJS	=	$(SRCS:.cpp=.o)
 HEAD	=	inf_int.h
 
-CC		=	clang
+CC		=	clang++
 RM		=	rm -f
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJS) $(HEAD)
-	$(CC) $^ -o $@
+	$(CC) $(OBJS) -include $(HEAD) -o $@
 
 %.o		:	%.cpp
 	$(CC) -c $^ -o $@
@@ -40,6 +40,6 @@ re		:
 test	:
 	make all
 	make clean
-	./test_inf_int
+	./$(NAME)
 
 .PHONY	:	all clean fclean re test
