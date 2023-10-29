@@ -203,13 +203,13 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
 
     const inf_int *big, *small;
     bool resultSign = true;
-    if (a > b) {
+    if ((a.thesign == true && a > b) || (a.thesign == false && a < b)) {
         big = &a;
         small = &b;
     } else {
         big = &b;
         small = &a;
-        resultSign = false;
+		resultSign = false;
     }
 
     char* result_digits = new char[big->length];
@@ -236,7 +236,7 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
     inf_int result;
 	result.digits = result_digits;
 	result.length = endi + 1;
-    result.thesign = resultSign;
+    result.thesign = !(resultSign ^ big->thesign);
     return result;
 }
 
@@ -273,7 +273,10 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
     inf_int product;
 	product.digits = result_digits;
 	product.length = size;
-    product.thesign = !(a.thesign ^ b.thesign); // 곱셈의 결과 부호 결정
+	if (product.length == 1 && product.digits[0] == 0)
+		product.thesign = true;
+	else
+    	product.thesign = !(a.thesign ^ b.thesign); // 곱셈의 결과 부호 결정
     return product;
 }
 
