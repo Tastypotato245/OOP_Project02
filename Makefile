@@ -12,27 +12,28 @@
 NAME	=	inf_int
 C_NAME	=	inf_int_null
 
-SRCS	=	main.cpp inf_int.cpp
+SRCS	=	main.cpp inf_int.cpp calculator.cpp
 OBJS	=	$(SRCS:.cpp=.o)
-C_SRCS	=	main.cpp inf_int_null.cpp
+C_SRCS	=	main.cpp inf_int_null.cpp calculator.cpp
 C_OBJS	=	$(C_SRCS:.cpp=.o)
 HEAD	=	inf_int.h
 
 CC		=	clang++
+CFLAGS	=	-fsanitize=address -g3
 RM		=	rm -f
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJS) $(HEAD)
-	$(CC) $(OBJS) -include $(HEAD) -o $@
+	$(CC) $(CFLAGS) $(OBJS) -include $(HEAD) -o $@
 
 comp	:	$(C_NAME)
 
 $(C_NAME)	:	$(C_OBJS) $(HEAD)
-	$(CC) $(C_OBJS) -include $(HEAD) -o $@
+	$(CC) $(CFLAGS) $(C_OBJS) -include $(HEAD) -o $@
 
 %.o		:	%.cpp
-	$(CC) -c $^ -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 clean	:
 	$(RM) $(OBJS)
