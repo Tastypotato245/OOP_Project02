@@ -51,7 +51,7 @@ inf_int Calculator::calculate(deque<string>& expression) {
 //				break;
 			default:
 				cout << "unexpected situation\n";
-				break;
+				exit(1);
 		}
 	}
 
