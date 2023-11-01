@@ -11,6 +11,7 @@ void	read_process()
 	while (1)
 	{
 		string str;
+		cout << "Input: ";
 		getline(cin, str);
 
 		deque<string> expression;
@@ -21,7 +22,7 @@ void	read_process()
 		}
 
 		inf_int result = Calculator::calculate(expression);
-		cout << result << '\n';
+		cout << "Output: " << result << '\n';
 	}
 }
 
