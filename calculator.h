@@ -1,7 +1,6 @@
 #ifndef _CALCULATOR_H_
 #define _CALCULATOR_H_
 
-#include <vector>
 #include <queue>
 
 #include "inf_int.h"
@@ -27,7 +26,7 @@ class Calculator {
 	const static int in_stack_precedence[];
 	const static int incoming_precedence[];
 
-	static vector<string> infix_to_postfix(deque<string> expression);
+	static deque<string> infix_to_postfix(deque<string> expression);
 	static Operator get_operator(string str);
 };
 

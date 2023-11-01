@@ -7,7 +7,7 @@ const int Calculator::in_stack_precedence[] = {0, 3, 1, 1, 2, 2, 0};
 const int Calculator::incoming_precedence[] = {4, 3, 1, 1, 2, 2, 0};
 
 inf_int Calculator::calculate(deque<string> expression) {
-	vector<string> postfix = infix_to_postfix(expression);
+	deque<string> postfix = infix_to_postfix(expression);
 
 	for (int i = 0; i < postfix.size(); i++) {
 		cout << "[debug] " << postfix[i] << '\n';
@@ -16,12 +16,12 @@ inf_int Calculator::calculate(deque<string> expression) {
 	return inf_int();
 }
 
-vector<string> Calculator::infix_to_postfix(deque<string> expression) {
+deque<string> Calculator::infix_to_postfix(deque<string> expression) {
 	expression.push_back("$");
 	stack<string> s;
 	s.push("$");
 
-	vector<string> postfix;
+	deque<string> postfix;
 	while (get_operator(expression.front()) != EOS) {
 		if (get_operator(expression.front()) == CONST) {
 			postfix.push_back(expression.front());
