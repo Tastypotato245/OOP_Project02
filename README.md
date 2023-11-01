@@ -27,10 +27,5 @@ Output: 2345234545758667
 Input: ^C
 ```
 ## Test environment
-- macOS 14.0 arm64
-- Debian GNU/Linux 11 aarch64
-
-## Compiler
-- Apple clang version 14.0.3 (clang-1403.0.22.14.1)
-- Target: arm64-apple-darwin23.0.0
-
+- macOS 14.0 arm64 (clang 15.0.0)
+- Debian GNU/Linux 11 aarch64 (g++ 10.2.1)
