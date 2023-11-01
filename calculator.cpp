@@ -8,12 +8,55 @@ const int Calculator::incoming_precedence[] = {4, 3, 1, 1, 2, 2, 0};
 
 inf_int Calculator::calculate(deque<string> expression) {
 	deque<string> postfix = infix_to_postfix(expression);
+	stack<inf_int> s;
 
-	for (int i = 0; i < postfix.size(); i++) {
-		cout << "[debug] " << postfix[i] << '\n';
+	inf_int x, y;
+
+	while (postfix.size() != 0) {
+		switch (get_operator(postfix.front())) {
+			case CONST:
+				s.push(inf_int(postfix.front().c_str()));
+				postfix.pop_front();
+				break;
+			case ADD:
+				x = s.top();
+				s.pop();
+				y = s.top();
+				s.pop();
+				s.push(x + y);
+				postfix.pop_front();
+				break;
+			case SUB:
+				x = s.top();
+				s.pop();
+				y = s.top();
+				s.pop();
+				s.push(x - y);
+				postfix.pop_front();
+				break;
+			case MULT:
+				x = s.top();
+				s.pop();
+				y = s.top();
+				s.pop();
+				s.push(x * y);
+				postfix.pop_front();
+				break;
+//			case DIV:
+//				x = s.top();
+//				s.pop();
+//				y = s.top();
+//				s.pop();
+//				s.push(x / y);
+//				break;
+			default:
+				cout << "unexpected situation\n";
+				break;
+		}
 	}
 
-	return inf_int();
+
+	return s.top();
 }
 
 deque<string> Calculator::infix_to_postfix(deque<string> expression) {
