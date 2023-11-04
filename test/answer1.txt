@@ -1,0 +1,12 @@
+Output: -12
+Output: -30
+Output: 30
+Output: 12
+Output: 12
+Output: -30
+Output: 30
+Output: -12
+Output: -12
+Output: 0
+Output: -6
+Output: -2
