@@ -240,7 +240,7 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
 
 // Multiplication operator
 inf_int operator*(const inf_int& a, const inf_int& b) {
-    std::vector<int> result(a.length + b.length, 0); // 최대 길이
+    std::vector<int> result(a.length + b.length, 0); // maximum length of result
 
     // Multiply each digit(int) of a with b
     for (unsigned int i = 0; i < a.length; i++) {
@@ -257,7 +257,7 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
 
 		// Convert the result to a string
     while (result.size() > 1 && result.back() == 0) {
-        result.pop_back(); // 맨 끝의 0을 제거
+        result.pop_back(); // remove the last zero
     }
 
 	unsigned int size = result.size();
