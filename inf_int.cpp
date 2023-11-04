@@ -227,7 +227,7 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
     }
 
     int endi;
-    for (endi = big->length; endi >= 0 && result_digits[endi] == 0; --endi);
+    for (endi = big->length - 1; endi >= 0 && result_digits[endi] == 0; --endi);
     if (endi == -1) {
         delete[] result_digits;
         return inf_int();
