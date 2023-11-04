@@ -35,7 +35,7 @@ void	argv_process(int argc, char **argv)
 			expression.push_back(word);
 		}
 		inf_int result = Calculator::calculate(expression);
-		cout << result << '\n';
+		cout << "Output: " << result << '\n';
 }
 
 int main(int argc, char **argv)
