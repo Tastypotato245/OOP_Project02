@@ -125,9 +125,18 @@ bool operator!=(const inf_int& a, const inf_int& b) {
 
 // Greater than operator
 bool operator>(const inf_int& a, const inf_int& b) {
-	if (a < b) return false;
-	if (a == b) return false;
-	return true;
+	if (a.thesign && !b.thesign) return true;
+	if (!a.thesign && b.thesign) return false;
+
+	if (a.length > b.length) return a.thesign;
+	if (a.length < b.length) return !a.thesign;
+
+	for (int i = a.length - 1; i >= 0; --i) {
+		if (a.digits[i] > b.digits[i]) return a.thesign;
+		if (a.digits[i] < b.digits[i]) return !a.thesign;
+	}
+
+	return (false);
 }
 
 // Less than operator
@@ -135,18 +144,12 @@ bool operator<(const inf_int& a, const inf_int& b) {
 	if (!a.thesign && b.thesign) return true;
 	if (a.thesign && !b.thesign) return false;
 
-	if (a.length < b.length) return true;
-	if (a.length > b.length) return false;
+	if (a.length < b.length) return a.thesign;
+	if (a.length > b.length) return !a.thesign;
 
 	for (int i = a.length - 1; i >= 0; --i) {
-		if (a.digits[i] > b.digits[i]) {
-			if (a.thesign == true) return false;
-			else return true;
-		}
-		if (a.digits[i] < b.digits[i]) {
-			if (a.thesign == true) return true;
-			else return false;
-		}
+		if (a.digits[i] > b.digits[i]) return a.thesign;
+		if (a.digits[i] < b.digits[i]) return !a.thesign;
 	}
 	return (false);
 }
