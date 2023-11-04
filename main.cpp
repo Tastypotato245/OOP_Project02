@@ -20,6 +20,8 @@ void	read_process()
 		while (ss >> word) {
 			expression.push_back(word);
 		}
+		if (expression.size() == 1 && expression[0].compare("0") == 0)
+			return;
 
 		inf_int result = Calculator::calculate(expression);
 		cout << "Output: " << result << '\n';
@@ -42,5 +44,6 @@ int main(int argc, char **argv)
 {
 	if (argc == 1)
 		read_process();
-	argv_process(argc, argv);
+	else
+		argv_process(argc, argv);
 }
