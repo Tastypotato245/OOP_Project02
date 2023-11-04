@@ -109,7 +109,7 @@ Operator Calculator::get_operator(const string& str) {
 	if (str.compare("*") == 0) {
 		return MULT;
 	}
-	if (str.compare("/") == 0) {
+	if (str.compare("/") == 0) {	//this won't work
 		return DIV;
 	}
 	if (str.compare("$") == 0) {

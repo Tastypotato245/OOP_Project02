@@ -242,24 +242,24 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
 
 // Multiplication operator
 inf_int operator*(const inf_int& a, const inf_int& b) {
-    std::vector<int> result(a.length + b.length, 0); // 최대 길이
+    std::vector<int> result(a.length + b.length, 0); // maximum length of result
 
-    // a의 각 자리수와 b의 각 자리수를 곱함
+    // Multiply each digit(int) of a with b
     for (unsigned int i = 0; i < a.length; i++) {
         for (unsigned int j = 0; j < b.length; j++) {
             result[i + j] += a.digits[i] * b.digits[j];
         }
     }
 
-    // 자리 올림 처리
+    // Make each space of the result have only one digit(0 ~ 9)
     for (unsigned int i = 0; i < result.size() - 1; i++) {
         result[i + 1] += result[i] / 10;
         result[i] %= 10;
     }
 
-    // 결과를 문자열로 변환
+    // Convert the result to a string
     while (result.size() > 1 && result.back() == 0) {
-        result.pop_back(); // 맨 끝의 0을 제거
+        result.pop_back(); // remove the last zero
     }
 
 	unsigned int size = result.size();
@@ -276,7 +276,8 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
 	if (product.length == 1 && product.digits[0] == 0)
 		product.thesign = true;
 	else
-    	product.thesign = !(a.thesign ^ b.thesign); // 곱셈의 결과 부호 결정
+    	product.thesign = !(a.thesign ^ b.thesign);
+				// Set the sign(+/-) of the result of multiplication
     return product;
 }
 
