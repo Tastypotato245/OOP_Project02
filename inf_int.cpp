@@ -294,3 +294,10 @@ std::ostream& operator<<(std::ostream& out, const inf_int& num) {
 	}
 	return out;
 }
+
+inf_int inf_int::abs() {
+	inf_int result(*this);
+	if (result.thesign == false)
+		result.thesign = !result.thesign;
+	return result;
+}
