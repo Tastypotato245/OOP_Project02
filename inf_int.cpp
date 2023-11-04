@@ -280,6 +280,12 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
     return product;
 }
 
+inf_int operator-(const inf_int& a) {
+	inf_int result(a);
+	result.thesign = !result.thesign;
+	return result;
+}
+
 // Output stream operator
 std::ostream& operator<<(std::ostream& out, const inf_int& num) {
 	if (!num.thesign) out << '-';
