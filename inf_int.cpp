@@ -205,6 +205,10 @@ inf_int operator-(const inf_int& a, const inf_int& b) {
         return result;
     }
 
+	if (a.thesign == false && b.thesign == false) {
+		return a + -b;
+	}
+
     const inf_int *big, *small;
     bool resultSign = true;
     if ((a.thesign == true && a > b) || (a.thesign == false && a < b)) {
