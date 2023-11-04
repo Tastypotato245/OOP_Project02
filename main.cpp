@@ -37,13 +37,15 @@ void	argv_process(int argc, char **argv)
 			expression.push_back(word);
 		}
 		inf_int result = Calculator::calculate(expression);
-		cout << result << '\n';
+		cout << "Output: " << result << '\n';
 }
 
 int main(int argc, char **argv)
 {
+	// If an input is empty
 	if (argc == 1)
 		read_process();
 	else
 		argv_process(argc, argv);
+	return 0;
 }

@@ -29,3 +29,6 @@ Input: ^C
 ## Test environment
 - macOS 14.0 arm64 (clang 15.0.0)
 - Debian GNU/Linux 11 aarch64 (g++ 10.2.1)
+
+- if you want to execute on macOS(using Intel CPU),
+- delete "-fsanitize=address -g3" of (Makefile - CFLAG option)
