@@ -157,9 +157,11 @@ bool operator<(const inf_int& a, const inf_int& b) {
 // Addition operator
 inf_int operator+(const inf_int& a, const inf_int& b) {
     if (a.thesign != b.thesign) {
-        inf_int temp_b = b;
-        temp_b.thesign = !temp_b.thesign;
-        return a - temp_b;
+		inf_int a_abs = a.abs();
+		inf_int b_abs = b.abs();
+		inf_int result = a_abs - b_abs;
+		result.thesign = a.thesign ? result.thesign : !result.thesign;
+        return result;
     }
 
     unsigned int max_length = std::max(a.length, b.length);
