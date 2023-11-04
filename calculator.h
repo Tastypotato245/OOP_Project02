@@ -8,13 +8,13 @@
 using namespace std;
 
 enum Operator {
-	LPAREN,
-	RPAREN,
-	ADD,
-	SUB,
-	MULT,
-	DIV,
-	EOS,
+	LPAREN,	//(
+	RPAREN,	//)
+	ADD,		//+
+	SUB,		//-
+	MULT,		//* (input must be "\*")
+	DIV,		//(Not gonna work, theres no any implementation on DIV)
+	EOS,		//$ (End of String)
 	CONST,
 };
 
