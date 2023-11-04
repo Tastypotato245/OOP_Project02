@@ -46,7 +46,7 @@ class inf_int
 
 		friend std::ostream& operator<<(std::ostream& , const inf_int&);
 
-		inf_int abs();
+		inf_int abs() const;
 };
 
 #endif

@@ -196,9 +196,11 @@ inf_int operator+(const inf_int& a, const inf_int& b) {
 // Subtraction operator
 inf_int operator-(const inf_int& a, const inf_int& b) {
     if (a.thesign != b.thesign) {
-        inf_int temp_b = b;
-        temp_b.thesign = !temp_b.thesign;
-        return a + temp_b;
+		inf_int a_abs = a.abs();
+		inf_int b_abs = b.abs();
+		inf_int result = a_abs + b_abs;
+		result.thesign = a.thesign;
+        return result;
     }
 
     const inf_int *big, *small;
@@ -296,7 +298,7 @@ std::ostream& operator<<(std::ostream& out, const inf_int& num) {
 	return out;
 }
 
-inf_int inf_int::abs() {
+inf_int inf_int::abs() const {
 	inf_int result(*this);
 	if (result.thesign == false)
 		result.thesign = !result.thesign;
