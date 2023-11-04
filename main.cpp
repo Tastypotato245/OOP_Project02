@@ -40,7 +40,9 @@ void	argv_process(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+	// If an input is empty
 	if (argc == 1)
 		read_process();
 	argv_process(argc, argv);
+	return 0;
 }
