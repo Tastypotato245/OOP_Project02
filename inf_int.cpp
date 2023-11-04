@@ -293,7 +293,9 @@ inf_int operator-(const inf_int& a) {
 
 // Output stream operator
 std::ostream& operator<<(std::ostream& out, const inf_int& num) {
-	if (!num.thesign) out << '-';
+	inf_int negative_zero;
+	negative_zero.thesign = false;
+	if (num != negative_zero && !num.thesign) out << '-';
 	for (int i = num.length - 1; i >= 0; --i) {
 		out << (char)(num.digits[i] + '0');
 	}
