@@ -23,8 +23,7 @@ void	read_process()
 		if (expression.size() == 1 && expression[0].compare("0") == 0)
 			return;
 
-		inf_int result = Calculator::calculate(expression);
-		cout << "Output: " << result << '\n';
+		Calculator::calculate(expression);
 	}
 }
 
@@ -36,8 +35,7 @@ void	argv_process(int argc, char **argv)
 			string word(argv[i]);
 			expression.push_back(word);
 		}
-		inf_int result = Calculator::calculate(expression);
-		cout << "Output: " << result << '\n';
+		Calculator::calculate(expression);
 }
 
 int main(int argc, char **argv)

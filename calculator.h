@@ -20,7 +20,7 @@ enum Operator {
 
 class Calculator {
 	public:
-	static inf_int calculate(deque<string>& expression);
+	static void calculate(deque<string>& expression);
 
 	private:
 	const static int in_stack_precedence[];
