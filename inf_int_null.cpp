@@ -49,7 +49,7 @@ inf_int::inf_int(int num) {
 		length = 0;
 	digits = new char[length + 1];
 	temp = un;
-	for (int i = 0; i < length; ++i) {
+	for (unsigned int i = 0; i < length; ++i) {
 		digits[i] = temp % 10 + '0';
 		temp /= 10;
 	}
