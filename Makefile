@@ -43,4 +43,4 @@ test	:
 	make clean
 	./$(NAME)
 
-.PHONY	:	all clean fclean re test comp ctest
+.PHONY	:	all clean fclean re test
