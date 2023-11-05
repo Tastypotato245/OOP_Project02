@@ -92,7 +92,7 @@ deque<string> Calculator::infix_to_postfix(deque<string>& expression) {
 			}
 			s.pop();
 		} else if (in_stack_precedence[get_operator(s.top())]
-				<= incoming_precedence[get_operator(expression.front())]) {
+				< incoming_precedence[get_operator(expression.front())]) {
 			s.push(expression.front());
 			expression.pop_front();
 		} else {
