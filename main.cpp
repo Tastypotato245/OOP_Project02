@@ -29,13 +29,13 @@ void	read_process()
 
 void	argv_process(int argc, char **argv)
 {
-		deque<string> expression;
+	deque<string> expression;
 
-		for (int i = 1; i < argc; i++) {
-			string word(argv[i]);
-			expression.push_back(word);
-		}
-		Calculator::calculate(expression);
+	for (int i = 1; i < argc; i++) {
+		string word(argv[i]);
+		expression.push_back(word);
+	}
+	Calculator::calculate(expression);
 }
 
 int main(int argc, char **argv)
