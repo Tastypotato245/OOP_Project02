@@ -48,7 +48,7 @@ inf_int::inf_int(int num) {
 		length = 0;
 	digits = new char[length];
 	temp = un;
-	for (int i = 0; i < length; ++i) {
+	for (unsigned int i = 0; i < length; ++i) {
 		digits[i] = temp % 10;
 		temp /= 10;
 	}
@@ -157,9 +157,11 @@ bool operator<(const inf_int& a, const inf_int& b) {
 // Addition operator
 inf_int operator+(const inf_int& a, const inf_int& b) {
     if (a.thesign != b.thesign) {
-        inf_int temp_b = b;
-        temp_b.thesign = !temp_b.thesign;
-        return a - temp_b;
+		inf_int a_abs = a.abs();
+		inf_int b_abs = b.abs();
+		inf_int result = a_abs - b_abs;
+		result.thesign = a.thesign ? result.thesign : !result.thesign;
+        return result;
     }
 
     unsigned int max_length = std::max(a.length, b.length);
@@ -196,10 +198,16 @@ inf_int operator+(const inf_int& a, const inf_int& b) {
 // Subtraction operator
 inf_int operator-(const inf_int& a, const inf_int& b) {
     if (a.thesign != b.thesign) {
-        inf_int temp_b = b;
-        temp_b.thesign = !temp_b.thesign;
-        return a + temp_b;
+		inf_int a_abs = a.abs();
+		inf_int b_abs = b.abs();
+		inf_int result = a_abs + b_abs;
+		result.thesign = a.thesign;
+        return result;
     }
+
+	if (a.thesign == false && b.thesign == false) {
+		return a + -b;
+	}
 
     const inf_int *big, *small;
     bool resultSign = true;
@@ -281,11 +289,26 @@ inf_int operator*(const inf_int& a, const inf_int& b) {
     return product;
 }
 
+inf_int operator-(const inf_int& a) {
+	inf_int result(a);
+	result.thesign = !result.thesign;
+	return result;
+}
+
 // Output stream operator
 std::ostream& operator<<(std::ostream& out, const inf_int& num) {
-	if (!num.thesign) out << '-';
+	inf_int negative_zero;
+	negative_zero.thesign = false;
+	if (num != negative_zero && !num.thesign) out << '-';
 	for (int i = num.length - 1; i >= 0; --i) {
 		out << (char)(num.digits[i] + '0');
 	}
 	return out;
+}
+
+inf_int inf_int::abs() const {
+	inf_int result(*this);
+	if (result.thesign == false)
+		result.thesign = !result.thesign;
+	return result;
 }

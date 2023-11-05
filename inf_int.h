@@ -42,7 +42,11 @@ class inf_int
 		friend inf_int operator-(const inf_int& , const inf_int&);
 		friend inf_int operator*(const inf_int& , const inf_int&);
 
+		friend inf_int operator-(const inf_int&);
+
 		friend std::ostream& operator<<(std::ostream& , const inf_int&);
+
+		inf_int abs() const;
 };
 
 #endif

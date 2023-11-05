@@ -19,7 +19,7 @@ C_OBJS	=	$(C_SRCS:.cpp=.o)
 HEAD	=	inf_int.h
 
 CC		=	c++
-CFLAGS	=	-fsanitize=address -g3
+CFLAGS	=	-Wextra -Wall -Werror -fsanitize=address -g3
 RM		=	rm -f
 
 all		:	$(NAME)

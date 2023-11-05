@@ -31,7 +31,7 @@ inf_int Calculator::calculate(deque<string>& expression) {
 				s.pop();
 				y = s.top();
 				s.pop();
-				s.push(x - y);
+				s.push(y - x);
 				postfix.pop_front();
 				break;
 			case MULT:
